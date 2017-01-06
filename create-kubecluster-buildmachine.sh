@@ -1,5 +1,11 @@
 #!//bin/bash
 
+# cleanup previous builds
+if [ -d ~/gopath/src/github.com/Azure/acs-engine/_output/ ]
+then
+  rm -rf  ~/gopath/src/github.com/Azure/acs-engine/_output/
+fi
+
 export PATH=$PATH:/home/chris/bin
 #az login
 #azure account show
@@ -29,19 +35,17 @@ cd $GOPATH/src/github.com/Azure/acs-engine
 go build
 
 
-cp ~/gopath/src/github.com/Azure/acs-engine/examples/kubernetes.json /opt/acs-kube-template.json
+cp -f ~/gopath/src/github.com/Azure/acs-engine/examples/kubernetes.json /opt/acs-kube-template.json
 cd /opt
 sed -in "s/keyData\": \"\"/keyData\": \"$sshKey\"/g" acs-kube-template.json
 sed -in "s/servicePrincipalClientID\": \"\"/servicePrincipalClientID\": $clientid/g" acs-kube-template.json
 sed -in "s/servicePrincipalClientSecret\": \"\"/servicePrincipalClientSecret\": $clientsecret/g" acs-kube-template.json
 sed -in "s/dnsPrefix\": \"\"/dnsPrefix\": \"a${id}z\"/g" acs-kube-template.json
-sed -in "s/dnsPrefix\": \"\"/dnsPrefix\": \"a${id}z\"/g" acs-kube-template.json
-
 
 
 cd ~/gopath/src/github.com/Azure/acs-engine
 ./acs-engine /opt/acs-kube-template.json
-cp _output/Kubernetes*/azuredeploy* /opt
+cp -f _output/Kubernetes*/azuredeploy* /opt
 cd /opt
 
 azure group create \
