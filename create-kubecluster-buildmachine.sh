@@ -49,7 +49,7 @@ azure group create \
     --location="east us"
 
 sed -in '/agentpool1Count/!b;n;c\"value\": '$agentcount'' /opt/azuredeploy.parameters.json
-sed -in  's/^.*\"storageAccountBaseName.*/\"storageAccountBaseName\":\"'kubestorage$storageName'\",/' azuredeploy.json
+sed -in  's/^.*\"storageAccountBaseName.*/\"storageAccountBaseName\":\"'kube$storageName'\",/' azuredeploy.json
 
 azure group deployment create \
     --name=$id \
@@ -57,8 +57,8 @@ azure group deployment create \
     --template-file="azuredeploy.json" \
     --parameters-file="azuredeploy.parameters.json"
 
-#rm -f /opt/azuredeploy.*
-#rm -f /opt/acs-kube-template.json*
+rm -f /opt/azuredeploy.*
+rm -f /opt/acs-kube-template.json*
 
 if [ ! -d ~/.kube ]
 then
