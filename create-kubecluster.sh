@@ -15,7 +15,7 @@ id=$(uuid)
 
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/gopath
-go get github.com/Azure/acs-engine
+go get github.com/Azure/acs-engine 2>/dev/null
 go get all
 cd $GOPATH/src/github.com/Azure/acs-engine
 go build
