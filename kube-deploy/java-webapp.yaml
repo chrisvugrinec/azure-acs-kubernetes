@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: java-webapp-demo
 spec:
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:

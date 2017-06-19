@@ -1,6 +1,7 @@
 # Azure Container Service Kubernetes Demo
 
 see it in action: https://youtu.be/jxpW7xpAkGQ
+Please use the sources from https://github.com/chrisvugrinec/azure-acs-kubernetes2
 
 ## What is it
 
